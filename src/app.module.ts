@@ -23,7 +23,7 @@ import { LoggingInterceptor } from './interceptor/logging.interceptor';
     //   provide: APP_FILTER,
     //   useClass: HttpExceptionFilter
     // },
-    {
+    { // 인터셉터 전역으로 등록
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,
     }
