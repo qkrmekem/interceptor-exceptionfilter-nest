@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, ForbiddenException, Get, HttpException, HttpStatus, Post, UseFilters, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, ForbiddenException, Get, HttpException, HttpStatus, Post, UseFilters, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
 import { HttpExceptionFilter } from './filter/http-exceptions.filter';
 import { LoggingInterceptor } from './interceptor/logging.interceptor';
@@ -34,5 +34,20 @@ export class AppController {
   @UseInterceptors(LoggingInterceptor)
   interceptorTest(){
     return 'test';
+  }
+
+  @Delete('/cron')
+  deleteSchedule(){
+    this.appService.deleteCron('testAddCron');
+  }
+
+  @Post('/cron')
+  createCron(){
+    this.appService.addCronJob('testAddCron', '*');
+  }
+
+  @Get('/cron')
+  getCrons(){
+    this.appService.getCrons();
   }
 }
